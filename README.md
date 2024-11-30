@@ -99,7 +99,27 @@ The app fetches real-time sensor data (such as temperature and heart rate) from 
 - The data is fetched using an HTTP GET request to the Flask API endpoint `http://127.0.0.1:5000/api/sensor_data`.
 - The sensor data is processed and displayed on a graph using the `fl_chart` package.
 
+### Backend API
+- Endpoint: http://`IP_ADDRESS`:5000/api/sensor_data
+- Description: This endpoint simulates real-time sensor data retrieval for connected health monitoring.
+Response Example:
+```json
+{
+  "temperature": 36.6,
+  "heartRate": 72,
+}
+```
+
 ---
+
+## Key Provider Classes
+- `CurrentScreenProvider`: Manages navigation state for the main screens.
+- `DeviceProvider`: Handles mock BLE/Wi-Fi devices and user-defined additions.
+- `LoadingProvider`: Manages the loading state for various app processes.
+- `SensorDataProvider`: Fetches and processes real-time sensor data from the API.
+- `WiFiInfoProvider`: Retrieves and displays current Wi-Fi details (e.g., SSID, BSSID, IP).
+
+
 
 ![image](https://github.com/user-attachments/assets/54d64827-e345-47e1-96b4-4caf337e6d95)
 
