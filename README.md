@@ -94,6 +94,20 @@ The Bluetooth and Wi-Fi simulation in this app allows the user to interact with 
 This simulation of Bluetooth and Wi-Fi devices allows users to test and explore the app’s functionality without needing physical devices, making it easier to develop and test IoT-related features in the app.
 
 ---
+
+## Dual Theme Mode
+The app supports light and dark themes, allowing users to switch between them based on their preference. This feature enhances user experience and accessibility.
+
+### Implementation:
+- State Management: The app uses a ThemeProvider class, which handles the current theme mode.
+- Dynamic Theme Switching: The user can toggle between light and dark themes using a toggle button in the app settings.
+  
+### Key Benefits:
+- Better readability and reduced eye strain in low-light environments with the dark mode.
+- A modern, customizable look that adapts to user preferences.
+
+
+---
 ## Real-Time Sensor Data Fetching
 The app fetches real-time sensor data (such as temperature and heart rate) from the Flask server:
 - The data is fetched using an HTTP GET request to the Flask API endpoint `http://127.0.0.1:5000/api/sensor_data`.
@@ -120,14 +134,19 @@ Response Example:
 - `WiFiInfoProvider`: Retrieves and displays current Wi-Fi details (e.g., SSID, BSSID, IP).
 
 
+![IMG-20241201-WA0005](https://github.com/user-attachments/assets/a156ddb7-47ad-43f5-b426-27f2647441fa)
 
-![image](https://github.com/user-attachments/assets/54d64827-e345-47e1-96b4-4caf337e6d95)
+![IMG-20241201-WA0006](https://github.com/user-attachments/assets/074c4cd9-0e2e-4730-b380-bef522d5d1b4)
+![IMG-20241201-WA0004](https://github.com/user-attachments/assets/85a0dff9-5ca3-4fea-af18-7386f3c9e2ed)
+![IMG-20241201-WA0002](https://github.com/user-attachments/assets/cfc71f28-5a9d-46ab-8015-dd8c5eee14dd)
+![IMG-20241201-WA0003](https://github.com/user-attachments/assets/e96faa70-cd67-4590-8849-32fec482d53a)
 
-![image](https://github.com/user-attachments/assets/5cc2c775-5c02-46e2-8d9c-7079803a8680)
+
+
 
 
 ## Video Link
-https://drive.google.com/file/d/18DndY1i3QyLVgjNbRHx5c5e85bTNUHgG/view?usp=drivesdk
+[https://drive.google.com/file/d/18DndY1i3QyLVgjNbRHx5c5e85bTNUHgG/view?usp=drivesdk](https://drive.google.com/file/d/18LKa79lXLU3Ea4KVe6Zd2yODPCqo0vxa/view?usp=sharing)
 
 
 ---
