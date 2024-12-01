@@ -16,7 +16,7 @@ class DeviceItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       shadowColor: Colors.black87,
-      color: Colors.grey[300],
+      color: Theme.of(context).colorScheme.surface,
       elevation: 10,
       margin: const EdgeInsets.symmetric(vertical: 8),
       child: ListTile(
@@ -24,32 +24,30 @@ class DeviceItem extends StatelessWidget {
             ? Icon(
                 Icons.wifi,
                 size: 40,
-                color: Colors.black,
               )
             : Icon(
                 Icons.bluetooth,
                 size: 40,
-                color: Colors.black,
               ),
         title: Text(
           deviceName,
           style: const TextStyle(
-            color: Colors.black,
             fontSize: 16,
             fontWeight: FontWeight.bold,
           ),
         ),
         subtitle: Text(
           "Connection Type: $connectionType",
-          style: TextStyle(color: Colors.black),
         ),
         trailing: ElevatedButton(
           style: ButtonStyle(
-              backgroundColor: WidgetStatePropertyAll(Colors.black)),
+            backgroundColor:
+                WidgetStatePropertyAll(Theme.of(context).colorScheme.primary),
+          ),
           onPressed: onConnect,
-          child: const Text(
+          child: Text(
             "Connect",
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(color: Theme.of(context).colorScheme.secondary),
           ),
         ),
       ),

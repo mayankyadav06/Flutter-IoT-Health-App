@@ -33,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[300],
+      backgroundColor: Theme.of(context).colorScheme.surface,
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         // Device provider consumer
@@ -45,26 +45,29 @@ class _HomeScreenState extends State<HomeScreen> {
                 const Text(
                   "Add New Device",
                   style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black),
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 const SizedBox(height: 16),
                 // Input field for device name
                 TextField(
+                  cursorColor: Theme.of(context).colorScheme.secondary,
                   controller: _deviceNameController,
                   decoration: InputDecoration(
                     labelText: "Device Name",
-                    labelStyle: TextStyle(color: Colors.black),
+                    labelStyle: TextStyle(
+                      color: Theme.of(context).colorScheme.secondary,
+                    ),
                     border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black),
+                      borderSide: BorderSide(
+                          color: Theme.of(context).colorScheme.secondary),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.black),
                     ),
                     prefixIcon: Icon(
                       Icons.device_hub,
-                      color: Colors.black, // Icon color red
                     ),
                   ),
                   onChanged: (value) {
@@ -74,14 +77,17 @@ class _HomeScreenState extends State<HomeScreen> {
                 const SizedBox(height: 16),
                 // Dropdown menu for connection type
                 DropdownButtonFormField<String>(
-                  dropdownColor: Colors.grey[300],
+                  dropdownColor: Theme.of(context).colorScheme.surface,
                   value: deviceProvider.selectedConnectionType,
                   decoration: InputDecoration(
-                    iconColor: Colors.black,
-                    labelStyle: TextStyle(color: Colors.black),
+                    iconColor: Theme.of(context).colorScheme.secondary,
+                    labelStyle: TextStyle(
+                      color: Theme.of(context).colorScheme.secondary,
+                    ),
                     labelText: "Connection Type",
                     border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black),
+                      borderSide: BorderSide(
+                          color: Theme.of(context).colorScheme.secondary),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.black),
@@ -99,12 +105,10 @@ class _HomeScreenState extends State<HomeScreen> {
                           Icon(
                             connectionType['icon'] as IconData,
                             size: 20,
-                            color: Colors.black,
                           ),
                           const SizedBox(width: 8),
                           Text(
                             connectionType['type'] as String,
-                            style: TextStyle(color: Colors.black),
                           ),
                         ],
                       ),
@@ -119,7 +123,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 Center(
                   child: ElevatedButton(
                     style: ButtonStyle(
-                      backgroundColor: WidgetStatePropertyAll(Colors.black),
+                      backgroundColor: WidgetStatePropertyAll(
+                          Theme.of(context).colorScheme.primary),
                     ),
                     onPressed: () {
                       final deviceName = deviceProvider.deviceName.trim();
@@ -158,9 +163,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       _deviceNameController.clear();
                       deviceProvider.clearDevice();
                     },
-                    child: const Text(
+                    child: Text(
                       "Submit",
-                      style: TextStyle(color: Colors.white),
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.secondary,
+                      ),
                     ),
                   ),
                 ),

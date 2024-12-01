@@ -68,14 +68,13 @@ class _DevicesScreenState extends State<DevicesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[300],
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
         automaticallyImplyLeading: true,
-        backgroundColor: Colors.grey[400],
         centerTitle: true,
         title: Text(
           widget.connectionType,
-          style: TextStyle(color: Colors.black),
+          style: TextStyle(fontWeight: FontWeight.w500),
         ),
       ),
       body: Consumer<LoadingProvider>(
@@ -214,7 +213,11 @@ class _DevicesScreenState extends State<DevicesScreen> {
           title: const Text("Enter Wi-Fi Password"),
           content: TextField(
             controller: passwordController,
-            decoration: const InputDecoration(labelText: 'Password'),
+            decoration: InputDecoration(
+              labelText: 'Password',
+              labelStyle:
+                  TextStyle(color: Theme.of(context).colorScheme.secondary),
+            ),
             obscureText: true,
           ),
           actions: [
@@ -248,7 +251,11 @@ class _DevicesScreenState extends State<DevicesScreen> {
                   );
                 }
               },
-              child: const Text('Connect'),
+              child: Text(
+                'Connect',
+                style:
+                    TextStyle(color: Theme.of(context).colorScheme.secondary),
+              ),
             ),
           ],
         );

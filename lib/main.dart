@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:iot_health_app/providers/loading_provider.dart';
 import 'package:iot_health_app/providers/sensor_data_provider.dart';
 import 'package:iot_health_app/providers/wifi_info_provider.dart';
+import 'package:iot_health_app/themes/theme.dart';
+import 'package:iot_health_app/themes/theme_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:iot_health_app/providers/current_screen_provider.dart';
 import 'package:iot_health_app/providers/device_provider.dart';
 import 'package:iot_health_app/screens/home_screen.dart';
-import 'package:iot_health_app/widgets/custom_bottom_navbar.dart';
 import 'package:provider/provider.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
@@ -28,11 +29,17 @@ class HealthApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => WiFiInfoProvider()),
         ChangeNotifierProvider(create: (context) => LoadingProvider()),
         ChangeNotifierProvider(create: (context) => SensorDataProvider()),
+        ChangeNotifierProvider(create: (context) => ThemeProvider()),
       ],
-      child: MaterialApp(
-        navigatorKey: navigatorKey,
-        debugShowCheckedModeBanner: false,
-        home: const PermissionHandlerScreen(),
+      child: Builder(
+        builder: (context) {
+          return MaterialApp(
+            theme: Provider.of<ThemeProvider>(context).themeData,
+            navigatorKey: navigatorKey,
+            debugShowCheckedModeBanner: false,
+            home: const PermissionHandlerScreen(),
+          );
+        },
       ),
     );
   }
@@ -114,7 +121,21 @@ class MainScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.grey[400],
+        automaticallyImplyLeading: false,
+        actions: [
+          Consumer<ThemeProvider>(
+            builder: (context, themeProvider, child) {
+              return IconButton(
+                onPressed: () {
+                  themeProvider.toggleTheme();
+                },
+                icon: Icon(themeProvider.themeData == darkMode
+                    ? Icons.light_mode
+                    : Icons.dark_mode),
+              );
+            },
+          ),
+        ],
         title: const Text(
           'IoT Health App',
           style: TextStyle(fontWeight: FontWeight.w500),

@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:iot_health_app/widgets/custom_bottom_navbar.dart';
 import 'package:provider/provider.dart';
 import 'package:fl_chart/fl_chart.dart';
 import '../providers/current_screen_provider.dart';
@@ -42,15 +41,44 @@ class _DataVisualisationScreenState extends State<DataVisualisationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[300],
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
         centerTitle: true,
-        title: const Text("Visualisation",
-            style: TextStyle(fontWeight: FontWeight.bold)),
-        backgroundColor: Colors.grey[400],
+        title: const Text(
+          "Visualisation",
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ),
-      bottomNavigationBar:
-          CustomBottomNavbar(), // Custom Navigation Bar using Gnav
+      bottomNavigationBar: Consumer<CurrentScreenProvider>(
+        builder: (context, currentScreenProvider, child) {
+          return BottomNavigationBar(
+            unselectedIconTheme: IconThemeData(
+              color: Theme.of(context).colorScheme.secondary,
+            ),
+            selectedItemColor: Theme.of(context).colorScheme.secondary,
+            selectedIconTheme: IconThemeData(
+              color: Theme.of(context).colorScheme.secondary,
+            ),
+            backgroundColor: Theme.of(context).colorScheme.surface,
+            unselectedLabelStyle: TextStyle(fontWeight: FontWeight.bold),
+            selectedLabelStyle: TextStyle(
+              fontWeight: FontWeight.bold,
+            ),
+            currentIndex: currentScreenProvider.currentScreen,
+            onTap: (value) {
+              currentScreenProvider.changeScreen(value);
+            },
+            items: const [
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.table_chart_rounded), label: "Data"),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.show_chart), label: "Chart"),
+            ],
+          );
+        },
+      ),
       body: Consumer<SensorDataProvider>(
         builder: (context, sensorDataProvider, child) {
           if (sensorDataProvider.sensorData == null) {
@@ -65,8 +93,8 @@ class _DataVisualisationScreenState extends State<DataVisualisationScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Card(
-                    color: Colors.grey[300],
-                    elevation: 8,
+                    color: Theme.of(context).colorScheme.surface,
+                    elevation: 10,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
@@ -75,12 +103,12 @@ class _DataVisualisationScreenState extends State<DataVisualisationScreen> {
                       child: Row(
                         children: [
                           Icon(Icons.thermostat_outlined,
-                              size: 50, color: Colors.red),
+                              size: 40, color: Colors.amber[900]),
                           const SizedBox(width: 16),
                           Text(
                             "Temperature: ${sensorDataProvider.sensorData!.temperature} °C",
                             style: const TextStyle(
-                                fontSize: 22, fontWeight: FontWeight.bold),
+                                fontSize: 20, fontWeight: FontWeight.w500),
                           ),
                         ],
                       ),
@@ -88,8 +116,8 @@ class _DataVisualisationScreenState extends State<DataVisualisationScreen> {
                   ),
                   const SizedBox(height: 20),
                   Card(
-                    color: Colors.grey[300],
-                    elevation: 8,
+                    color: Theme.of(context).colorScheme.surface,
+                    elevation: 10,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
@@ -98,12 +126,12 @@ class _DataVisualisationScreenState extends State<DataVisualisationScreen> {
                       child: Row(
                         children: [
                           Icon(Icons.favorite,
-                              size: 50, color: Colors.pinkAccent),
+                              size: 40, color: Colors.pink[700]),
                           const SizedBox(width: 16),
                           Text(
                             "Heart Rate: ${sensorDataProvider.sensorData!.heartRate} BPM",
                             style: const TextStyle(
-                                fontSize: 22, fontWeight: FontWeight.bold),
+                                fontSize: 20, fontWeight: FontWeight.w500),
                           ),
                         ],
                       ),
@@ -143,13 +171,15 @@ class _DataVisualisationScreenState extends State<DataVisualisationScreen> {
                   ),
                   borderData: FlBorderData(
                     show: true,
-                    border: Border.all(color: Colors.teal, width: 1),
+                    border: Border.all(
+                        color: Theme.of(context).colorScheme.secondary,
+                        width: 1),
                   ),
                   lineBarsData: [
                     LineChartBarData(
                       spots: sensorDataProvider.temperatureData,
                       isCurved: true,
-                      barWidth: 4,
+                      barWidth: 3,
                       color: Colors.teal, // Line color
                       belowBarData: BarAreaData(
                           show: true, color: Colors.teal.withOpacity(0.3)),
